@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Quiz from "./Quiz";
 import { VscAccount } from "react-icons/vsc";
+import { useNavigate } from "react-router-dom";
 
 const QuizContainer = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(true); // Replace with actual authentication logic
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);
@@ -17,7 +20,7 @@ const QuizContainer = () => {
 
     const handleLogout = () => {
         // Logic for logging out
-        console.log("Logout clicked");
+        navigate("/signin");
         setIsAuthenticated(false); // Example logout
     };
 
