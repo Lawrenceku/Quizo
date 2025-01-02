@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Quiz from "./quiz";
+import Quiz from "./Quiz";
 import { VscAccount } from "react-icons/vsc";
 
 const QuizContainer = () => {
