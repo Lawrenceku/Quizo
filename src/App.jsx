@@ -1,7 +1,20 @@
+import { 
+  QuizContainer,
+  SignIn,
+  SignUp
+ } from "./utils/index"
+import { BrowserRouter,Routes,Route } from "react-router-dom"
+
 function App() {
   return (
     <>
-      
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<QuizContainer/>} />
+          <Route path="/signin" element={<SignIn/>} />
+          <Route path="/sigup" element={<SignUp/>} />
+        </Routes>
+    </BrowserRouter>
     </>
   )
 }
