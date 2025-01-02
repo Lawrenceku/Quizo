@@ -19,7 +19,7 @@ const QuestionCard = ({ question, options, onAnswer, selectedAnswer, isAnswered 
                             {option.answer}
                         </label>
                     </div>
-                ))}
+                ))} 
             </div>
         </div>
     );
