@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Quiz from "./Quiz";
 import { VscAccount } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 
 const QuizContainer = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(true); // Replace with actual authentication logic
+    const [isAuthenticated, setIsAuthenticated] = useState(false); // Replace with actual authentication logic
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [user,setUser] = useState(null);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(localStorage.getItem('user')) {
+            setIsAuthenticated(true);
+            setUser(localStorage.getItem('user'));
+        }
+    }, []);
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);
@@ -33,7 +41,7 @@ const QuizContainer = () => {
                 <div className="relative">
                     {isAuthenticated && 
                         <button className="flex items-center" onClick={toggleDropdown}>
-                            <span className="font-medium mx-8">Welcome Lawrence</span><VscAccount size={40} />
+                            <span className="font-medium mx-8">Welcome {user.username}</span><VscAccount size={40} />
                         </button>}
 
                     {dropdownOpen && isAuthenticated && (

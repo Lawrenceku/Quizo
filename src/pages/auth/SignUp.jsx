@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const SignUp = () => {
     });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -27,7 +29,7 @@ const SignUp = () => {
             });
 
             if (response.ok) {
-                // Handle successful sign up
+                navigate('/signin'); // Redirect to sign in page on success
                 console.log('Signed up successfully');
             } else {
                 // Handle sign up error

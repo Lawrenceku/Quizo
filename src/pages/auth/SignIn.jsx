@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -23,11 +25,11 @@ const SignIn = () => {
             });
 
             if (response.ok) {
-                // Handle successful sign-in
+                const user = response.json(); // Read the response body as JSON
+                localStorage.setItem('user', JSON.stringify(user)); // Store user data in local storage
                 console.log('Signed in successfully');
-                // Redirect to dashboard or another page
+                navigate('/'); // Redirect to home page
             } else {
-                // Handle sign-in error
                 const errorData = await response.json();
                 setError(errorData.message);
             }
