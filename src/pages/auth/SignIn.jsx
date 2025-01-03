@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' });
+    const [formData, setFormData] = useState({ username: '', password: '' });
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -16,16 +16,16 @@ const SignIn = () => {
         setLoading(true); // Set loading state to true
         setError(null); // Clear previous errors
         try {
-            const response = await fetch('https://placeholder-endpoint.com/signin', {
+            const response = await fetch('https://quizo-backend-bx0u.onrender.com/api/auth/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
-
+    
             if (response.ok) {
-                const user = response.json(); // Read the response body as JSON
+                const user = await response.json(); // Await the response body as JSON
                 localStorage.setItem('user', JSON.stringify(user)); // Store user data in local storage
                 console.log('Signed in successfully');
                 navigate('/'); // Redirect to home page
@@ -40,17 +40,17 @@ const SignIn = () => {
             setLoading(false); // Reset loading state
         }
     };
-
+    
     return (
         <div className="flex items-center justify-center h-screen bg-gradient-to-tr from-green-600 to-green-900">
             <div className="bg-white p-8 rounded shadow-md w-80">
                 <h2 className="text-2xl mb-4 text-gray-800 font-bold">Sign In</h2>
                 {error && <p className="text-red-600 mb-4">{error}</p>}
                 <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
+                    type="username"
+                    name="username"
+                    placeholder="username"
+                    value={formData.username}
                     onChange={handleInputChange}
                     className="w-full p-2 mb-4 border border-gray-300 rounded"
                 />

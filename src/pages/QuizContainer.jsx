@@ -11,11 +11,15 @@ const QuizContainer = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(localStorage.getItem('user')) {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
             setIsAuthenticated(true);
-            setUser(localStorage.getItem('user'));
+            setUser(JSON.parse(storedUser)); // Parse the string to an object
+        } else {
+            navigate('/signin');
         }
     }, []);
+    
 
     const toggleDropdown = () => {
         setDropdownOpen((prev) => !prev);

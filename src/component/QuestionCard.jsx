@@ -1,25 +1,29 @@
-const QuestionCard = ({ question, options, onAnswer, selectedAnswer, isAnswered }) => {
+import React from 'react';
+
+const QuestionCard = ({ question, options, selectedAnswer, onAnswer }) => {
     return (
-        <div className="bg-gradient-to-r from-green-400 to-green-500 p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">{question}</h2>
-            <div>
+        <div className="space-y-4">
+            <h2 className="text-xl font-semibold text-gray-800">{question}</h2>
+            <div className="space-y-2">
                 {options.map((option, index) => (
-                    <div key={index} className={`mb-2 p-2 rounded-lg 
-                        ${isAnswered ? 
-                            option.isCorrect ? 'bg-green-300' : 
-                            (selectedAnswer === option.answer ? 'bg-red-300' : '') : ''}`}>
-                        <label>
-                            <input
-                                type="radio"
-                                value={option.answer}
-                                checked={selectedAnswer === option.answer}
-                                onChange={() => onAnswer(option.answer)}
-                                className="mr-2"
-                            />
-                            {option.answer}
-                        </label>
-                    </div>
-                ))} 
+                    <label
+                        key={index}
+                        className={`block p-4 border rounded-lg cursor-pointer transition-colors duration-200
+                            ${selectedAnswer === option 
+                                ? 'bg-blue-100 border-green-500' 
+                                : 'hover:bg-gray-50 border-gray-200'}`}
+                    >
+                        <input
+                            type="radio"
+                            name="answer"
+                            value={option}
+                            checked={selectedAnswer === option}
+                            onChange={(e) => onAnswer(e.target.value)}
+                            className="mr-3"
+                        />
+                        {option}
+                    </label>
+                ))}
             </div>
         </div>
     );

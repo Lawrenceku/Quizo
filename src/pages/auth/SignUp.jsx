@@ -20,7 +20,7 @@ const SignUp = () => {
         setLoading(true); // Set loading state to true
         setError(null); // Clear previous errors
         try {
-            const response = await fetch('https://placeholder-endpoint.com/signup', {
+            const response = await fetch('https://quizo-backend-bx0u.onrender.com/api/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
