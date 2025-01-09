@@ -46,7 +46,7 @@ const QuizContainer = () => {
                 <div className="relative">
                     {isAuthenticated && 
                     < div className="flex items-center" >
-                    <span className="font-medium mx-8">Welcome {user.username}</span>
+                    <span className="font-medium mx-4 text-sm">Welcome {user.username}</span>
                         <button onClick={toggleDropdown}>
                             <VscAccount size={40} />
                         </button>

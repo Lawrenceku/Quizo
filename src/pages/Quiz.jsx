@@ -7,31 +7,84 @@ const Quiz = () => {
     const [questions, setQuestions] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [answeredQuestions, setAnsweredQuestions] = useState({}); // Track answered questions
+    const [answeredQuestions, setAnsweredQuestions] = useState({});
     const [score, setScore] = useState(0);
     const [isQuizCompleted, setIsQuizCompleted] = useState(false);
+    const [loading, setLoading] = useState(false); // New loading state for refetching
+    const [time, setTime] = useState(60);
 
     const shuffleArray = (array) => {
         return array
-            .map(value => ({ value, sort: Math.random() })) // Attach a random key
-            .sort((a, b) => a.sort - b.sort) // Sort by random key
-            .map(({ value }) => value); // Extract original values
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
     };
-    
-    useEffect(() => {
+
+    const fetchQuestions = () => {
+        setLoading(true); // Start loading
+        setTime(60); // Reset time
         fetch('https://quizo-backend-bx0u.onrender.com/api/quiz/questions')
             .then(response => response.json())
             .then(data => {
-                // Shuffle options for each question
                 const shuffledData = data.map(question => ({
                     ...question,
                     options: shuffleArray(question.options),
                 }));
                 setQuestions(shuffledData);
+                setLoading(false); // End loading
+                startTimer();
             })
-            .catch(error => console.error('Error fetching data:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setLoading(false); // End loading on error
+            });
+    };
+
+        const startTimer = () => {
+            // Clear any existing timer
+            if (window.timer) {
+                clearInterval(window.timer);
+            }
+            // Start a new timer
+            window.timer = setInterval(() => {
+                setTime((prevTime) => {
+                    if (prevTime === 1) { // At 1 to avoid skipping the final second
+                        clearInterval(window.timer);
+                        handleAutoSubmit();
+                    }
+                    return prevTime - 1;
+                });
+            }, 1000);
+        };
+
+        const handleAutoSubmit = () => {
+            setIsQuizCompleted(true);
+            // Optional: Calculate the final score if needed
+            const finalScore = questions.reduce((score, question, index) => {
+                const correctOption = question.options.find(opt => opt.isCorrect);
+                return score + (selectedAnswers[index] === correctOption.answer ? 1 : 0);
+            }, 0);
+            setScore(finalScore);
+        };
+
+    useEffect(() => {
+        return () => {
+            if (window.timer) {
+                clearInterval(window.timer);
+            }
+        };
     }, []);
     
+
+    const handleRestart = () => {
+        setCurrentQuestionIndex(0);
+        setScore(0);
+        setIsQuizCompleted(false);
+        setSelectedAnswers({});
+        setAnsweredQuestions({});
+        fetchQuestions(); // Refetch questions
+    };
+
     const handleAnswer = (answer) => {
         setSelectedAnswers((prev) => ({
             ...prev,
@@ -45,20 +98,16 @@ const Quiz = () => {
         const currentQuestion = questions[currentQuestionIndex];
         const correctOption = currentQuestion.options.find(opt => opt.isCorrect);
 
-        // Only update score if the question hasn't been answered yet
         if (!answeredQuestions[currentQuestionIndex]) {
             if (selectedAnswers[currentQuestionIndex] === correctOption.answer) {
                 setScore((prevScore) => prevScore + 1);
             }
-
-            // Mark the question as answered
             setAnsweredQuestions((prev) => ({
                 ...prev,
                 [currentQuestionIndex]: true,
             }));
         }
 
-        // Move to next question or complete quiz
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
@@ -66,7 +115,7 @@ const Quiz = () => {
         }
     };
 
-    if (!questions || questions.length === 0) {
+    if (loading || !questions || questions.length === 0) {
         return <Loader />;
     }
 
@@ -77,18 +126,13 @@ const Quiz = () => {
         <div>
             {isQuizCompleted ? (
                 <QuizCompletion
-                    onClick={() => {
-                        setCurrentQuestionIndex(0);
-                        setScore(0);
-                        setIsQuizCompleted(false);
-                        setSelectedAnswers({});
-                        setAnsweredQuestions({});
-                    }}
+                    onclick={handleRestart}
                     score={score}
                 />
-                
             ) : (
-                <div className="flex justify-center items-center w-full h-screen bg-gray-100">
+                <div className="flex flex-col justify-center items-center w-full h-screen bg-gray-100">
+                    <span className={`${time <= 10 ? 'text-red-500' : time <= 30 ? 'text-orange-500' : 'text-gray-900'} text-2xl my-10 mx-auto`}
+                    ><span className='text-gray-900 font-medium'>Time left:</span> {time}s</span>
                     <form onSubmit={handleSubmit} className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg">
                         <div className="mb-4 flex justify-between items-center">
                             <span className="text-sm text-gray-600">
@@ -102,7 +146,7 @@ const Quiz = () => {
                         <QuestionCard
                             question={currentQuestion.question}
                             options={currentQuestion.options.map(opt => opt.answer)}
-                            selectedAnswer={selectedAnswers[currentQuestionIndex] || ''} // Get selected answer for the current question
+                            selectedAnswer={selectedAnswers[currentQuestionIndex] || ''}
                             onAnswer={handleAnswer}
                         />
 

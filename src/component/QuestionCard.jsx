@@ -2,7 +2,7 @@ import React from 'react';
 
 const QuestionCard = ({ question, options, selectedAnswer, onAnswer }) => {
     return (
-        <div className="space-y-4">
+        <div className="select-none space-y-4">
             <h2 className="text-xl font-semibold text-gray-800">{question}</h2>
             <div className="space-y-2">
                 {options.map((option, index) => (
