@@ -27,7 +27,7 @@ const Quiz = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        // Check if answer is correct
+        
         const currentQuestion = questions[currentQuestionIndex];
         const correctOption = currentQuestion.options.find(opt => opt.isCorrect);
         
@@ -55,7 +55,7 @@ const Quiz = () => {
     return (
         <div>
             {isQuizCompleted ? (
-                <QuizCompletion onclick={()=>{setCurrentQuestionIndex(0); setIsQuizCompleted(false)}} score={score} />
+                <QuizCompletion onclick={()=>{setCurrentQuestionIndex(0); setScore(0); setIsQuizCompleted(false)}} score={score} />
             ) : (
                 <div className="flex justify-center items-center w-full h-screen bg-gray-100">
                     <form onSubmit={handleSubmit} className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
@@ -63,10 +63,14 @@ const Quiz = () => {
                             <span className="text-sm text-gray-600">
                                 Question {questionNumber} of {questions.length}
                             </span>
-                            <span className="text-sm text-gray-600">
+                            <span className="text-sm text-gray-600 font-medium">
                                 Score: {score}
                             </span>
                         </div>
+                        <span></span>
+                        <span className="text-xs text-gray-900 my-1">
+                                    Category: {currentQuestion.category}
+                                </span>
                         
                         <QuestionCard
                             question={currentQuestion.question}

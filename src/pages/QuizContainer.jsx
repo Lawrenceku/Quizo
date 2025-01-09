@@ -32,6 +32,7 @@ const QuizContainer = () => {
 
     const handleLogout = () => {
         // Logic for logging out
+        localStorage.removeItem("user");
         navigate("/signin");
         setIsAuthenticated(false); // Example logout
     };
