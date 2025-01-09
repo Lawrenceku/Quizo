@@ -40,7 +40,17 @@ const TeamsSection = () => {
         ))}
       </div>
       <p className="text-center my-8">YUP! It's a one-man army</p>
-      
+      <div className="flex justify-center gap-3 w-28 mx-auto">
+        <a href="https://github.com/Lawrenceku" target="blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" />
+        </a>
+        <a href="https://x.com/Larry01_1" target="blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/665/665228.png" alt="" />
+        </a>
+        <a target="blank" href="https://www.linkedin.com/in/lawrence-eniola/">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" alt="" />
+        </a>
+      </div>
     </section>
   );
 };
