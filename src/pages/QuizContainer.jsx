@@ -64,6 +64,12 @@ const QuizContainer = () => {
                                 </li>
                                 <li
                                     className="cursor-pointer p-2 hover:bg-gray-200"
+                                    onClick={handleAddQuiz}
+                                >
+                                    Leaderboard
+                                </li>
+                                <li
+                                    className="cursor-pointer p-2 hover:bg-gray-200"
                                     onClick={handleLogout}
                                 >
                                     Logout

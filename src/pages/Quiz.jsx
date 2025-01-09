@@ -40,32 +40,26 @@ const Quiz = () => {
             });
     };
 
-        const startTimer = () => {
-            // Clear any existing timer
-            if (window.timer) {
-                clearInterval(window.timer);
-            }
-            // Start a new timer
-            window.timer = setInterval(() => {
-                setTime((prevTime) => {
-                    if (prevTime === 1) { // At 1 to avoid skipping the final second
-                        clearInterval(window.timer);
-                        handleAutoSubmit();
-                    }
-                    return prevTime - 1;
-                });
-            }, 1000);
-        };
-
-        const handleAutoSubmit = () => {
-            setIsQuizCompleted(true);
-            // Optional: Calculate the final score if needed
-            const finalScore = questions.reduce((score, question, index) => {
-                const correctOption = question.options.find(opt => opt.isCorrect);
-                return score + (selectedAnswers[index] === correctOption.answer ? 1 : 0);
-            }, 0);
-            setScore(finalScore);
-        };
+    const startTimer = () => {
+        // Clear any existing timer
+        if (window.timer) {
+            clearInterval(window.timer);
+        }
+        // Start a new timer
+        window.timer = setInterval(() => {
+            setTime((prevTime) => {
+                if (prevTime === 0) {
+                    clearInterval(window.timer);
+                    setIsQuizCompleted(true);
+                    return 0;
+                }
+                return prevTime - 1;
+            });
+        }, 1000);
+    };
+        useEffect(() => {
+        fetchQuestions();
+    }, []);
 
     useEffect(() => {
         return () => {
