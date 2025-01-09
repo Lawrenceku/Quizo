@@ -49,12 +49,14 @@ const SignUp = () => {
             <div className="bg-white p-8 rounded shadow-md w-80">
                 <h2 className="text-2xl mb-4 text-gray-800 font-bold">Sign Up</h2>
                 {error && <p className="text-red-600 mb-4">{error}</p>}
+                <form onSubmit={handleSignUp}>
                 <input
                     type="text"
                     name="username"
                     placeholder="Username"
                     value={formData.username}
                     onChange={handleInputChange}
+                    required
                     className="w-full p-2 mb-4 border rounded"
                 />
                 <input
@@ -63,6 +65,7 @@ const SignUp = () => {
                     placeholder="Email"
                     value={formData.email}
                     onChange={handleInputChange}
+                    required
                     className="w-full p-2 mb-4 border rounded"
                 />
                 <input
@@ -71,17 +74,18 @@ const SignUp = () => {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleInputChange}
+                    required
                     className="w-full p-2 mb-4 border rounded"
                 />
-                <button
-                    onClick={handleSignUp}
+                <input
+                    type='submit'
+                    value={loading ? 'Loading...' : 'Sign Up'}
                     disabled={loading} // Disable button when loading
                     className={`w-full px-4 py-2 text-white rounded ${
                         loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-green-800 hover:bg-green-700'
                     }`}
-                >
-                    {loading ? 'Loading...' : 'Sign Up'} {/* Change text based on loading state */}
-                </button>
+                />
+                </form>
                 <div className="text-center mt-4">
                     <p className="text-gray-600">
                         Already have an account? <a href="/signin" className="text-green-600 underline">Sign In</a>

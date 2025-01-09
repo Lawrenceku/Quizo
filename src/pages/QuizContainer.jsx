@@ -45,9 +45,13 @@ const QuizContainer = () => {
                 </span>
                 <div className="relative">
                     {isAuthenticated && 
-                        <button className="flex items-center" onClick={toggleDropdown}>
-                            <span className="font-medium mx-8">Welcome {user.username}</span><VscAccount size={40} />
-                        </button>}
+                    < div className="flex items-center" >
+                    <span className="font-medium mx-8">Welcome {user.username}</span>
+                        <button onClick={toggleDropdown}>
+                            <VscAccount size={40} />
+                        </button>
+                        </div>
+                        }
 
                     {dropdownOpen && isAuthenticated && (
                         <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md">

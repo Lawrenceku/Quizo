@@ -12,7 +12,8 @@ const SignIn = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSignIn = async () => {
+    const handleSignIn = async (e) => {
+        e.preventDefault(); // Prevent the default form submission
         setLoading(true); // Set loading state to true
         setError(null); // Clear previous errors
         try {
@@ -46,31 +47,35 @@ const SignIn = () => {
             <div className="bg-white p-8 rounded shadow-md w-80">
                 <h2 className="text-2xl mb-4 text-gray-800 font-bold">Sign In</h2>
                 {error && <p className="text-red-600 mb-4">{error}</p>}
-                <input
-                    type="username"
-                    name="username"
-                    placeholder="username"
-                    value={formData.username}
-                    onChange={handleInputChange}
-                    className="w-full p-2 mb-4 border border-gray-300 rounded"
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="w-full p-2 mb-4 border border-gray-300 rounded"
-                />
-                <button
-                    onClick={handleSignIn}
-                    disabled={loading} // Disable button when loading
-                    className={`w-full px-4 py-2 text-white rounded ${
-                        loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-green-800 hover:bg-green-700'
-                    }`}
-                >
-                    {loading ? 'Loading...' : 'Sign In'} {/* Change text based on loading state */}
-                </button>
+                <form onSubmit={handleSignIn}>
+                    <input
+                        type="username"
+                        name="username"
+                        placeholder="username"
+                        value={formData.username}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full p-2 mb-4 border border-gray-300 rounded"
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full p-2 mb-4 border border-gray-300 rounded"
+                    />
+                    <button
+                        type="submit"
+                        disabled={loading} // Disable button when loading
+                        className={`w-full px-4 py-2 text-white rounded ${
+                            loading ? 'bg-gray-500 cursor-not-allowed' : 'bg-green-800 hover:bg-green-700'
+                        }`}
+                    >
+                        {loading ? 'Loading...' : 'Sign In'}
+                    </button>
+                </form>
                 <div className="text-center mt-4">
                     <p className="text-gray-600">
                         Don't have an account? <a href="/signup" className="text-green-600 underline">Sign Up</a>
