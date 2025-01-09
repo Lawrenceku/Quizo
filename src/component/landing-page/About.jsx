@@ -1,6 +1,6 @@
 const AboutSection = () => {
     return (
-      <section id="about" className="py-16 pb-28">
+      <section id="about" className="py-16 pb-32">
         <div className="container mx-auto ">
           <p className="mb-4 text-center font-bold text-2xl text-green-800">
             About Quizo
@@ -11,6 +11,7 @@ const AboutSection = () => {
           learning and assessments. Perfect for educational purposes, recruitment, or entertainment, 
           Quizo allows users to create and share quizzes while tracking top performers through a dynamic 
           leaderboard. With its interactive and engaging features, Quizo transforms the way you experience quizzes.          
+          <br/>Quizo isn’t just an app, it’s a community. Our goal is to bring learning to life through the power of play and competition. Whether you're a student preparing for exams, a teacher looking for an engaging classroom tool, or an HR manager creating team-building activities, Quizo is your perfect partner.
           </p>
         </div>
       </section>
