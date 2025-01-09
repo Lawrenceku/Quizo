@@ -6,14 +6,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #02482e; 
+    background-color: #2a2b2a; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #003823; 
+    background-color: #212121; 
 }
 
 
 body{
-    user-select: none   ;
+    scroll-behavior: smooth;
+}
+
+*{
+    scroll-behavior: smooth !important;
 }
