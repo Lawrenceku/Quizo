@@ -10,7 +10,7 @@ const QuestionCard = ({ question, options, selectedAnswer, onAnswer }) => {
                         key={index}
                         className={`block p-4 border rounded-lg cursor-pointer transition-colors duration-200
                             ${selectedAnswer === option 
-                                ? 'bg-blue-100 border-green-500' 
+                                ? 'bg-green-100 border-green-500' 
                                 : 'hover:bg-gray-50 border-gray-200'}`}
                     >
                         <input
