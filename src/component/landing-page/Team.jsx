@@ -26,7 +26,7 @@ const TeamsSection = () => {
         {teams.map((member) => (
           <div
             key={member.id}
-            className="team-card flex flex-col items-center bg-white shadow-md rounded-lg p-4 w-96 sm:w-64 md:w-80 lg:w-96"
+            className="team-card flex flex-col items-center bg-white shadow-md rounded-lg p-4 w-80 sm:w-64 md:w-80 lg:w-96"
           >
             <img
               src={member.img}

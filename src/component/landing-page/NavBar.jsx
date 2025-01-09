@@ -12,7 +12,7 @@ const Navbar = () => {
           </a>
         </div>
 
-        <div className="flex items-center space-x-8">
+        <div className="flex items-center space-x-4">
           <a
             href="#home"
             className="hidden md:inline text-white hover:text-green-300 transition duration-200"
@@ -31,11 +31,11 @@ const Navbar = () => {
           >
             Team
           </a>
-          <button onClick={()=>{navigate('/signin')}} className="text-green-500 bg-white px-6 py-2 rounded-lg shadow-md hover:bg-slate-100 transition duration-200">
+          <button onClick={()=>{navigate('/signin')}} className="text-green-500 bg-white px-6 py-2 rounded-lg shadow-md hover:bg-slate-100 transition duration-200 flex-shrink-0">
             Sign In
           </button>
 
-          <button onClick={()=>{navigate('/signup')}} className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-200">
+          <button onClick={()=>{navigate('/signup')}} className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-200 flex-shrink-0">
             Sign Up
           </button>
         </div>

@@ -16,7 +16,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-green-950 bg-opacity-50 backdrop-blur-sm"></div>
 
       {/* Content */}
-      <div className="relative text-3xl container mx-auto h-full flex flex-col justify-center items-center text-center text-white px-4">
+      <div className="relative text-3xl sm:pt-0 pt-32 container mx-auto h-full flex flex-col justify-center items-center text-center text-white px-4">
         <p className="text-5xl md:text-6xl font-bold text-white">
           Your one-stop quiz platform
         </p>
