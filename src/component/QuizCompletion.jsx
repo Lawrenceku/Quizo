@@ -38,7 +38,10 @@ const QuizCompletion = ({ score, onclick }) => {
             <p className="mt-2 text-lg text-center">
                 {gradeText}
             </p>
+            <div className='flex  gap-8'>
             <button className='text-white font-medium rounded px-4 py-2 my-8 bg-green-800' onClick={onclick}>Try again ?</button>
+            <button className='bg-white outline font-medium rounded px-4 py-2 my-8 text-green-800' onClick={()=>{navigate('/quizfeed')}}>Take another quiz</button>
+            </div>
         </div>
     );
 };
