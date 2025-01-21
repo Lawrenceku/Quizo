@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaCheck } from 'react-icons/fa';
+import { GoAlert } from "react-icons/go";
+import { GoX } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
 
 const QuizCompletion = ({ score, onclick }) => {
@@ -22,10 +24,16 @@ const QuizCompletion = ({ score, onclick }) => {
     return (
         <div className="flex pt-40 items-center flex-col w-full h-screen bg-gray-100">
             <div className={`flex justify-center items-center ${circleColor} w-32 h-32 rounded-full text-white text-4xl`}>
-                <FaCheck style={{ color: 'white', fontSize: '50px' }} />
+                {
+                score < 4 ?
+                <GoX style={{ color: 'white', fontSize: '50px' }} />
+                 : score < 6 ?
+                 <GoAlert style={{ color: 'white', fontSize: '50px' }} />:
+                 <FaCheck style={{ color: 'white', fontSize: '50px' }} />
+                }
             </div>
             <p className="mt-4 text-xl font-semibold text-center">
-                Congratulations! You've completed the quiz with a score of {score}.
+                You've completed the quiz with a score of {score}.
             </p>
             <p className="mt-2 text-lg text-center">
                 {gradeText}

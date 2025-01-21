@@ -7,7 +7,7 @@ import TeamSection from "../component/landing-page/Team";
 const LandingPage = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-        window.location.href = '/quiz';
+        window.location.href = '/quizfeed';
     }
     return (
         <div>
